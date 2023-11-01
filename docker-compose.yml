@@ -10,8 +10,9 @@ services:
         # MYSQL_ALLOW_EMPTY_PASSWORD: 1
         MYSQL_ROOT_PASSWORD: "123"
         # Log in: db, root, 123
-    volumes:
-        - ./dbfiles:/var/lib/mysql
+    # volumes:
+    #    - ./dbfiles:/var/lib/mysql
+    # не увидел смысла в наличии файлов mysql, лучше сделать dump.sql
     command:
         - --character-set-server=utf8mb4
         - --collation-server=utf8mb4_unicode_ci
