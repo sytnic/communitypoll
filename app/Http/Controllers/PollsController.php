@@ -26,4 +26,11 @@ class PollsController extends Controller
     	$poll = Poll::create($request->all());
     	return response()->json($poll, 201);
     }
+
+    // Редактирование записи
+    public function update(Request $request, Poll $poll) 
+    {
+        $poll->update($request->all());
+        return response()->json($poll, 200);
+    }
 }
