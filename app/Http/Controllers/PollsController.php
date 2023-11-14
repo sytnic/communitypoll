@@ -13,4 +13,10 @@ class PollsController extends Controller
         // с http ответом 200
         return response()->json(Poll::get(), 200);
     }
+
+    // Показать одну запись по идентификатору
+    public function show($id) 
+    {
+        return response()->json(Poll::find($id), 200);
+    }
 }
