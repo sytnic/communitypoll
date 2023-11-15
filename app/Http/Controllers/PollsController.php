@@ -17,7 +17,18 @@ class PollsController extends Controller
     // Показать одну запись по идентификатору
     public function show($id) 
     {
-        return response()->json(Poll::find($id), 200);
+        // Если id не существует,
+        // вернётся пустой json
+        $poll = Poll::find($id);
+        if (is_null($poll)) {
+            return response()->json(null, 404);
+        }
+
+        // find вернёт пустой json в ответе при неверном id,
+        // findOrFail вернёт страницу 404 при неверном id
+
+        //return response()->json(Poll::find($id), 200);
+        return response()->json(Poll::findOrFail($id), 200);
     }
 
     // Создать ресурс, http ответ 201
