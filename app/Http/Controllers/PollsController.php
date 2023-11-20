@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Poll;
 use Illuminate\Http\Request;
+use Validator;
 
 class PollsController extends Controller
 {
@@ -34,6 +35,14 @@ class PollsController extends Controller
     // Создать ресурс, http ответ 201
     public function store(Request $request) 
     {
+        $rules = [
+            'title' => 'required|max:255',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        //dd($validator->fails());
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
     	$poll = Poll::create($request->all());
     	return response()->json($poll, 201);
     }
