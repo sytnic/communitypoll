@@ -60,4 +60,14 @@ class PollsController extends Controller
         $poll->delete();
         return response()->json(null, 204);
     }
+
+    // возврат собственных ошибок по GET /api/errors
+    public function errors() 
+    {
+        // возвращается ошибка 501 и пустой массив
+        //return response()->json([], 501);
+
+        // возвращается ошибка 501 и массив с сообщением
+        return response()->json(['msg' => 'Payment is required.'], 501);
+    }
 }
