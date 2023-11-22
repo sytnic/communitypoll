@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Poll;
+use App\Http\Resources\Poll as PollResource;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -29,7 +30,13 @@ class PollsController extends Controller
         // findOrFail вернёт страницу 404 при неверном id
 
         //return response()->json(Poll::find($id), 200);
-        return response()->json(Poll::findOrFail($id), 200);
+        // будут возвращены все поля одной записи
+        //return response()->json(Poll::findOrFail($id), 200);
+
+        // работа с ресурсом
+        // будет возвращено то, что указано в Ресурсе
+        $response = new PollResource(Poll::findOrFail($id), 200);
+        return response()->json($response, 200);
     }
 
     // Создать ресурс, http ответ 201
